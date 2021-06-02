@@ -15,7 +15,7 @@
 # 5
 
 quantity = 6
-coordinates = [3, 4, 6, 12, 13, 14]
+coordinates = [1, 9, 12, 16, 19, 28]
 
 if  len(coordinates) == quantity > 1:
     # Вычисляем длины отрезков и записываем их в список Номер_гвоздя : Длина (кроме последнего)
@@ -23,17 +23,30 @@ if  len(coordinates) == quantity > 1:
     for nail in range(quantity-1):
         all_section.append([nail, coordinates[nail+1] - coordinates[nail]])
 
-    all_section.sort(key=lambda i: i[1]) # Сортируем списки в списке по длине отрезков (2 элемент)
 
+    nail_num = 0
+    length_all_section = 0
     all_nails = set() # Список гвоздей к которым привязана нитка
+
+    # Учтем, что первый и последний гвоздики объязательно будут связаны
+    # с их ближайшими соседями. Добавим эти номера в список связанных гвоздиков
+    # и удалим из списка отрезков, для случаев колда гвоздиков больше 3
+    if quantity > 3:
+        one_nail = all_section.pop(0) # Берем первый отрезок
+        length_all_section = one_nail[1] # Учитываем длину отрезка
+        all_nails.add(0) # Номер 1 гвоздика
+        all_nails.add(1) # Номер 2 гвоздика
+        one_nail = all_section.pop(len(all_section)-1) # Берем последний отрезок
+        length_all_section += one_nail[1] # Учитываем длину отрезка
+        all_nails.add(quantity - 1) # Запишем номер последнего гвоздика
+        all_nails.add(quantity - 2) # Запишем номер предпоследнего гвоздика
+
+    all_section.sort(key=lambda i: i[1]) # Сортируем списки в списке по длине отрезков (2 элемент)
 
     # Идем по списку отрезков начиная с самого короткого
     # Связывание гвоздей обозначаем занесением их номеров в список all_nails
     # Когда количество гвоздей в списке достигнет их общего количества - все связаны
     # Попутно считаем общую длину отрезков
-
-    nail_num = 0
-    length_all_section = 0
     while len(all_nails) < quantity:
         # Если в списке еще нет гвоздей с этими номерами, добавляем их
         nail_in_section = all_section[nail_num][0] # Номер гвоздя по очереди от 0
