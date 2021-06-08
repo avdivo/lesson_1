@@ -1,4 +1,4 @@
-m, n = 1, 10000000
+m, n = 2, 10000000
 
 # sum1 = 0
  
@@ -14,8 +14,15 @@ print(sum([x**2 for x in range(m, n + 1) if x & 1]))
 print ('3 Еще быстрее')    
 print(sum(x*x for x in range(m, n + 1) if x%2))
 
+
 print ('4 Очень быстро')    
 print(sum(x*x for x in range((m,m+1)[~m%2], n + 1, 2)))
+
+print ('4 Пробую, как вариант')    
+print(sum(x*x for x in range(m+(~m%2), n + 1, 2)))
+
+print ('4 Пробую, как второй вариант')    
+print(sum(x*x for x in range(m+(m%2^1), n + 1, 2)))
 
 print ('4 Пуля')    
 def sum_odd_quat(x):
