@@ -41,6 +41,7 @@ print ('Слова {} встречаются рядом в файле {} раз'
 
 # 2 вариант решения
 counts = Counter(three_words_2) 
+print(counts)
 counts = counts.most_common() # список с тройками слов и количествои (('abba', 'com', 'mother'), 3)
 
 print ('Слова {} встречаются рядом в файле {} раз'.format(counts[0][0], counts[0][1]))
