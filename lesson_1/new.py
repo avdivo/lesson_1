@@ -6,3 +6,5 @@ array = list(map(lambda x: x if x.find(':') == -1 else x.replace(':', ';'), arra
 print (cou)
 print (array)
 
+
+
