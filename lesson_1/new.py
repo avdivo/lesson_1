@@ -7,4 +7,3 @@ print (cou)
 print (array)
 
 
-
