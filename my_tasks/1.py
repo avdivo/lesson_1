@@ -1,11 +1,23 @@
-from typing import List, Dict
-import json
+import re
 
 
-def remove_duplicates(list_dicts: List[Dict]) -> List[Dict]:
-    """Удаляеение дубликатов из списка словарей"""
-    list_dicts = list(set(map(json.dumps, list_dicts)))
-    return list(map(json.loads, list_dicts))
+def encoder(string):
+    out = ''
+    cap = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    low = 'abcdefghijklmnopqrstuvwxyz'
+    reg = re.compile('[^a-zA-Z ]')
+    for word in string.split():
+        l = len(reg.sub('', word))
+        for let in word:
+            if let in cap:
+                let = cap[(cap.index(let) + l) % len(cap)]
+            elif let in low:
+                let = low[(low.index(let) + l) % len(low)]
+            out += let
+        out +=  ' '
+    out = out[:-1]
+    return out
 
-a = [{"key1": "value1"}, {"k1": "v1", "k2": "v2", "k3": "v3"}, {}, {}, {"key1": "value1"}, {"key1": "value1"}, {"key2": "value2"}]
-print(remove_duplicates(a))
+print(encoder('Day, mice. "Year" - a mistake'))
+
+# Gdb, qmgi. "Ciev" - b tpzahrl
